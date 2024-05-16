@@ -1,0 +1,36 @@
+name: Migrate SVN to GitHub
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install SVN
+      run: sudo apt-get install subversion -y
+
+    - name: Clone SVN repository
+      env:
+        SVN_REPO_URL: ${{ secrets.SVN_REPO_URL }}
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+      run: |
+        svn checkout --username $SVN_USERNAME --password $SVN_PASSWORD $SVN_REPO_URL svn_repo
+
+    - name: Convert SVN to Git
+      run: |
+        git svn clone --stdlayout --no-metadata svn_repo git_repo
+
+    - name: Push to GitHub
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cd git_repo
+        git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+        git branch -M main
+        git push -u origin main --force
