@@ -5,13 +5,13 @@ Action runner has to be the machine that has a copy of the svn repository to mig
 
 **PRE REQUISITOS:**
 (requisitos para maquina vm/runner in actions/local compu)
-    • `brew install git`
-    • `brew install git-svn`
-    • `brew install git-lfs`
+- `brew install git`
+- `brew install git-svn`
+- `brew install git-lfs`
 check installations
-    • `git-svn --version`
-    • `git --version`
-    • `svn --help`
+- `git-svn --version`
+- `git --version`
+- `svn --help`
 
 1.**Checkout repo from svn**
  
