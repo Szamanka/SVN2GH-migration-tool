@@ -8,7 +8,9 @@ Action runner has to be the machine that has a copy of the svn repository to mig
 - `brew install git`
 - `brew install git-svn`
 - `brew install git-lfs`
-check installations
+
+check installations:
+
 - `git-svn --version`
 - `git --version`
 - `svn --help`
